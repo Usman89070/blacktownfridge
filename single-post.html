@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article | Fridge Repairs Blacktown</title>
+<meta name="description" content="Read the latest news, maintenance tips, and troubleshooting guides for your residential and commercial refrigerators in Blacktown.">
+
+<!-- Favicon (Logo in browser tab) -->
+<link rel="icon" type="image/webp" href="/images/logo.webp">
+<link rel="apple-touch-icon" href="/images/logo.webp">
+
+<!-- Preconnect for faster font/icon loading -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+<link rel="preload" as="image" fetchpriority="high" href="/images/blog.webp">
+
+<!-- Fonts -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    :root {
+        --primary: #0F3D81;
+        --primary-light: #EBF1F8;
+        --primary-dark: #0A2959;
+        --secondary: #E63946;
+        --text-dark: #1E293B;
+        --text-light: #64748B;
+        --bg-light: #F8FAFC;
+        --white: #ffffff;
+        --font-main: 'Montserrat', sans-serif;
+        --radius: 16px;
+        --radius-sm: 8px;
+        --shadow-sm: 0 4px 14px rgba(15, 61, 129, 0.05);
+        --shadow-3d: 0 15px 35px -5px rgba(15, 61, 129, 0.15), 0 5px 15px rgba(0,0,0,0.05);
+        --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background-color: var(--bg-light); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    .frb-reveal { opacity: 0; transform: perspective(1200px) translateY(50px) translateZ(-50px) rotateX(-8deg); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); will-change: opacity, transform; }
+    .frb-reveal.active { opacity: 1; transform: perspective(1200px) translateY(0) translateZ(0) rotateX(0deg); }
+    
+    .frb-global-styles { font-family: var(--font-main); font-size: 16px; color: var(--text-dark); line-height: 1.7; }
+    .frb-global-styles a { text-decoration: none; transition: var(--transition); }
+    .frb-global-styles h1, .frb-global-styles h2, .frb-global-styles h3 { color: var(--primary); margin-top: 0; font-weight: 700; letter-spacing: -0.5px; }
+
+    /* HEADER & BLUR SCROLL EFFECT */
+    .frb-site-header { 
+        width: 100%; 
+        background-color: rgba(255, 255, 255, 0.95); 
+        backdrop-filter: blur(12px); 
+        -webkit-backdrop-filter: blur(12px); 
+        box-shadow: 0 4px 20px rgba(15, 61, 129, 0.08); 
+        position: fixed; 
+        top: 0; 
+        left: 0;
+        z-index: 9999; 
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease;
+    }
+    .frb-site-header.scrolled {
+        background-color: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 8px 25px rgba(15, 61, 129, 0.12);
+    }
+    .frb-header-container { width: 90%; max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; position: relative; }
+    .frb-logo img { max-height: 65px; width: auto; display: block; transition: var(--transition); }
+    .frb-logo img:hover { transform: scale(1.03) translateY(-2px); }
+    .frb-main-nav { flex-grow: 1; display: flex; justify-content: center; }
+    .frb-main-nav ul { list-style: none; display: flex; gap: 35px; margin: 0; padding: 0; }
+    .frb-main-nav ul li a { color: var(--text-dark); font-weight: 600; font-size: 0.95rem; text-transform: capitalize; position: relative; padding-bottom: 6px; }
+    .frb-main-nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--secondary); transition: var(--transition); border-radius: 2px; }
+    .frb-main-nav ul li a:hover, .frb-main-nav ul li a.active { color: var(--primary); }
+    .frb-main-nav ul li a:hover::after, .frb-main-nav ul li a.active::after { width: 100%; }
+    .frb-header-actions { display: flex; align-items: center; gap: 20px; }
+    .frb-mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); padding: 8px; border-radius: 8px; transition: var(--transition); }
+    .frb-mobile-toggle:hover { background-color: var(--primary-light); }
+    
+    .frb-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 32px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 0.85em; border: none; background: #e02431; color: var(--white); cursor: pointer; transition: var(--transition); box-shadow: 0 8px 25px rgba(224, 36, 49, 0.3); letter-spacing: 0.5px; }
+    .frb-btn:hover { color: var(--white); transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 30px rgba(224, 36, 49, 0.4); }
+
+    /* LAYOUT */
+    .frb-container { width: 90%; max-width: 1140px; margin: 0 auto; padding: 50px 0 80px; }
+    .frb-page-banner { background: linear-gradient(135deg, rgba(15, 61, 129, 0.92), rgba(10, 41, 89, 0.9)), url('/images/blog.webp') center/cover no-repeat; padding: 140px 0 60px; text-align: center; color: var(--white); }
+    .frb-page-banner h1 { font-size: clamp(32px, 5vw, 46px); color: var(--white); margin: 0; border: none; }
+
+    /* SINGLE POST STYLES */
+    .frb-back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-light); font-weight: 600; margin-bottom: 30px; transition: var(--transition); }
+    .frb-back-link:hover { color: var(--primary); transform: translateX(-5px); }
+
+    .frb-single-layout { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
+    @media (min-width: 992px) { .frb-single-layout { grid-template-columns: 2fr 1fr; } }
+
+    .frb-single-card { background: var(--white); border-radius: var(--radius); padding: clamp(30px, 5vw, 60px); box-shadow: var(--shadow-3d); border: 1px solid rgba(255,255,255,0.8); border-top: 2px solid #ffffff; }
+
+    .frb-post-header { text-align: center; margin-bottom: 40px; }
+    .frb-post-title { font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: var(--primary); margin-bottom: 15px; border: none; }
+    .frb-post-meta { color: var(--text-light); font-size: 0.95em; font-weight: 500; display: flex; justify-content: center; align-items: center; gap: 15px; }
+    .frb-post-meta i { color: var(--secondary); }
+
+    .frb-post-image-wrapper { width: 100%; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 40px; box-shadow: var(--shadow-sm); aspect-ratio: 672 / 372; background-color: var(--primary-light); }
+    .frb-post-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Strict Formatting for Injected WordPress Content */
+    .frb-post-text { width: 100%; max-width: 100%; color: var(--text-dark); font-size: 1.1em; line-height: 1.8; margin: 0 auto; overflow-wrap: break-word; word-wrap: break-word; }
+    .frb-post-text::after { content: ""; display: table; clear: both; }
+    .frb-post-text p { margin-bottom: 25px; max-width: 100%; }
+    .frb-post-text h2, .frb-post-text h3, .frb-post-text h4 { color: var(--primary); margin: 40px 0 20px; line-height: 1.3; font-weight: 700; clear: both; }
+    .frb-post-text ul, .frb-post-text ol { margin-bottom: 25px; padding-left: 20px; }
+    .frb-post-text li { margin-bottom: 10px; }
+    .frb-post-text img, .frb-post-text iframe, .frb-post-text video { max-width: 100%; height: auto; border-radius: var(--radius-sm); margin: 25px 0; box-shadow: var(--shadow-sm); }
+    .frb-post-text figure { margin: 25px 0; max-width: 100%; }
+    .frb-post-text blockquote { border-left: 4px solid var(--secondary); margin: 30px 0; font-style: italic; color: var(--text-light); background: var(--bg-light); padding: 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+    .frb-post-text a { color: var(--secondary); font-weight: 600; }
+    .frb-post-text a:hover { color: var(--primary); text-decoration: underline; }
+    
+    .frb-post-text .wp-block-image { max-width: 100%; }
+    .frb-post-text .alignleft { float: left; margin-right: 20px; margin-bottom: 10px; }
+    .frb-post-text .alignright { float: right; margin-left: 20px; margin-bottom: 10px; }
+    .frb-post-text .aligncenter { display: block; margin: 0 auto 20px auto; text-align: center; }
+
+    .frb-blog-loader { text-align: center; padding: 100px 20px; color: var(--text-light); font-weight: 500; font-size: 1.2em; }
+    .fa-spinner { animation: spin 1s linear infinite; margin-right: 10px; color: var(--secondary); }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* SIDEBAR */
+    .frb-sidebar { background: var(--white); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-3d); border: 1px solid rgba(255,255,255,0.8); border-top: 2px solid #ffffff; position: sticky; top: 100px; }
+    .frb-sidebar h3 { font-size: 1.25em; margin-bottom: 20px; border-bottom: 2px solid var(--primary-light); padding-bottom: 10px; }
+    .frb-recent-post-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; }
+    .frb-recent-post-item:last-child { margin-bottom: 0; }
+    .frb-recent-img { width: 80px; height: 80px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .frb-recent-img:hover { transform: scale(1.05); }
+    .frb-recent-title { font-size: 0.95em; line-height: 1.4; margin: 0; }
+    .frb-recent-title a { color: var(--text-dark); font-weight: 600; transition: var(--transition); }
+    .frb-recent-title a:hover { color: var(--secondary); }
+
+    /* FOOTER */
+    .frb-footer { background: linear-gradient(135deg, var(--primary-dark), #051530); color: var(--white); padding: 80px 0 20px; font-family: var(--font-main); box-shadow: inset 0 10px 20px rgba(0,0,0,0.5); }
+    .frb-footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; width: 90%; max-width: 1140px; margin: 0 auto; }
+    .frb-footer-logo-wrapper { background: var(--white); padding: 10px 20px; border-radius: var(--radius-sm); display: inline-block; box-shadow: var(--shadow-sm); margin-bottom: 15px; }
+    .frb-footer-brand p { color: rgba(255, 255, 255, 0.75); font-size: 0.95em; line-height: 1.7; margin-top: 10px; }
+    .frb-footer-contact { list-style: none; padding: 0; margin-top: 20px; }
+    .frb-footer-contact li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; color: rgba(255, 255, 255, 0.9); overflow-wrap: anywhere; word-break: break-word; }
+    .frb-footer-contact i { color: var(--secondary); font-size: 1.1em; flex-shrink: 0; margin-top: 4px; }
+    .frb-footer-contact a { color: inherit; text-decoration: none; transition: var(--transition); }
+    @media (hover: hover) { .frb-footer-contact a:hover { color: var(--white); text-shadow: 0 0 10px rgba(255,255,255,0.5); } }
+    .frb-footer-col h4 { color: var(--white); font-size: 1.15em; margin-top: 0; margin-bottom: 25px; position: relative; padding-bottom: 12px; font-weight: 700; letter-spacing: 0.5px; }
+    .frb-footer-col h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; border-radius: 3px; background: var(--secondary); box-shadow: 0 2px 5px rgba(230,57,70,0.5); }
+    .frb-footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .frb-footer-col ul li { margin-bottom: 12px; }
+    .frb-footer-col ul li a { color: rgba(255,255,255,0.75); transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; font-size: 0.95em; }
+    .frb-footer-col ul li a::before { content: '\f105'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 0.8em; color: var(--secondary); opacity: 0; transform: translateX(-10px); transition: var(--transition); }
+    @media (hover: hover) { .frb-footer-col ul li a:hover { color: var(--white); transform: translateX(5px); } .frb-footer-col ul li a:hover::before { opacity: 1; transform: translateX(0); } }
+    .frb-copyright { text-align: center; margin-top: 60px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); font-size: 0.9em; max-width: 1140px; margin-left: auto; margin-right: auto; width: 90%; }
+
+    @media (max-width:576px) {
+        .frb-footer-grid { gap: 30px; }
+    }
+
+    .frb-sticky-mobile { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #e02431; color: var(--white) !important; text-align: center; padding: 16px 20px; font-size: 1.05em; font-weight: 700; z-index: 10000; box-shadow: 0 -6px 20px rgba(0,0,0,0.2); text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; border-top: 1px solid rgba(255,255,255,0.2); }
+    .frb-sticky-mobile i { margin-right: 8px; }
+
+    @media (max-width: 992px) {
+        .frb-header-actions { display: none; }
+        .frb-mobile-toggle { display: flex; align-items: center; justify-content: center; }
+        
+        .frb-main-nav { 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            width: 100%; 
+            background-color: var(--white); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            z-index: 998;
+        }
+        .frb-main-nav.active { 
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .frb-main-nav ul { 
+            flex-direction: column; 
+            width: 100%; 
+            align-items: center;
+            padding: 10px 0;
+            gap: 0; 
+        }
+        .frb-main-nav ul li {
+            width: 100%;
+            text-align: center;
+        }
+        .frb-main-nav ul li a { 
+            display: block; 
+            padding: 16px 20px; 
+            border-bottom: 1px solid rgba(15, 61, 129, 0.06); 
+            text-align: center; 
+            font-size: 1.05rem; 
+        }
+        .frb-main-nav ul li:last-child a {
+            border-bottom: none;
+        }
+        .frb-main-nav ul li a.active,
+        .frb-main-nav ul li a:hover,
+        .frb-main-nav ul li a.active::after { 
+            background-color: transparent !important; 
+            color: var(--text-dark) !important;
+            width: auto !important;
+        }
+        
+        .frb-sticky-mobile { display: block; }
+        body { padding-bottom: 70px; } 
+    }
+</style>
+</head>
+<body>
+
+<div class="frb-global-styles">
+
+    <!-- HEADER -->
+    <header class="frb-site-header">
+        <div class="frb-header-container">
+            <div class="frb-logo">
+                <a href="/"><img src="/images/logo.webp" alt="Fridge Repairs Blacktown Logo" width="200" height="65"></a>
+            </div>
+            <nav class="frb-main-nav" id="frb-mobile-nav">
+                <ul>
+                    <li><a href="/#hero">Home</a></li>
+                    <li><a href="/#why-choose-us">About Us</a></li>
+                    <li><a href="/#services">Services</a></li>
+                    <li><a href="/#brands">Brands</a></li>
+                    <li><a href="/blog/" class="active">Blog</a></li>
+                    <li><a href="/#image-grid">Gallery</a></li>
+                    <li><a href="/#faq-section">FAQ</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="frb-header-actions">
+                <a href="/#contact-form" class="frb-btn frb-header-btn"><i class="fa-solid fa-calendar-days"></i> Book Now</a>
+            </div>
+            <button class="frb-mobile-toggle" id="frb-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+    
+    <!-- BANNER -->
+    <section class="frb-page-banner">
+        <div class="frb-container" style="padding: 0;">
+            <h1 class="frb-reveal active">Article</h1>
+        </div>
+    </section>
+
+    <!-- SINGLE POST CONTENT -->
+    <section class="frb-container">
+        
+        <a href="/blog/" class="frb-back-link"><i class="fa-solid fa-arrow-left"></i> Back to All Articles</a>
+
+        <div id="frb-single-loader" class="frb-blog-loader">
+            <i class="fa-solid fa-spinner fa-spin"></i> Loading article...
+        </div>
+
+        <div class="frb-single-layout">
+            
+            <!-- Article Area -->
+            <div class="frb-single-card frb-reveal" id="frb-post-wrapper" style="display: none;">
+                <div class="frb-post-header">
+                    <h1 class="frb-post-title" id="post-title">Loading...</h1>
+                    <div class="frb-post-meta">
+                        <span><i class="fa-solid fa-calendar-days"></i> <span id="post-date"></span></span>
+                    </div>
+                </div>
+                <div class="frb-post-image-wrapper" id="post-image-wrapper" style="display: none;">
+                    <img id="post-image" src="" alt="Featured Image">
+                </div>
+                <div class="frb-post-text" id="post-content">
+                    <!-- Text Injected Here -->
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="frb-sidebar frb-reveal" id="frb-sidebar" style="display: none;">
+                <h3>Recent Articles</h3>
+                <div id="sidebar-recent-posts">
+                    <!-- Sidebar articles injected here -->
+                </div>
+            </aside>
+
+        </div>
+        
+        <a href="/blog/" class="frb-back-link" style="margin-top:50px"><i class="fa-solid fa-arrow-left"></i> Back to All Articles</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="frb-footer">
+        <div class="frb-footer-grid">
+            <div class="frb-footer-col frb-footer-brand">
+                <div class="frb-footer-logo-wrapper">
+                    <img src="/images/logo.webp" alt="Fridge Repairs Blacktown Logo" width="55" height="65" loading="lazy" decoding="async" style="max-height: 50px; width: auto; display: block;">
+                </div>
+                <p>Providing reliable residential and commercial fridge repairs across Blacktown and surrounding suburbs.</p>
+                <ul class="frb-footer-contact">
+                    <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@fridgerepairblacktown.com.au">info@fridgerepairblacktown.com.au</a></li>
+                </ul>
+            </div>
+            <div class="frb-footer-col">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="/#services">Home Fridge Repairs</a></li>
+                    <li><a href="/#services">Commercial Fridge Repairs</a></li>
+                    <li><a href="/#services">Freezer Repairs</a></li>
+                    <li><a href="/#services">Coolroom Repairs</a></li>
+                    <li><a href="/#services">Fridge Regassing</a></li>
+                    <li><a href="/#services">Display Fridge Repairs</a></li>
+                    <li><a href="/#services">Salad Bar Fridge Repairs</a></li>
+                    <li><a href="/#services">Commercial Exhaust System Repairs</a></li>
+                    <li><a href="/#emergency">Emergency Fridge Repairs</a></li>
+                    <li><a href="/#emergency">Urgent Fridge Repairs</a></li>
+                </ul>
+            </div>
+            <div class="frb-footer-col">
+                <h4>Brands We Repair</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px 40px;">
+                    <ul style="flex: 1; min-width: 100px;">
+                        <li><a href="/#brands">LG</a></li>
+                        <li><a href="/#brands">Samsung</a></li>
+                        <li><a href="/#brands">Westinghouse</a></li>
+                        <li><a href="/#brands">Fisher & Paykel</a></li>
+                        <li><a href="/#brands">Electrolux</a></li>
+                        <li><a href="/#brands">Bosch</a></li>
+                    </ul>
+                    <ul style="flex: 1; min-width: 100px;">
+                        <li><a href="/#brands">Skope</a></li>
+                        <li><a href="/#brands">Hoshizaki</a></li>
+                        <li><a href="/#brands">Williams</a></li>
+                        <li><a href="/#brands">Polar</a></li>
+                        <li><a href="/#brands">Skipio</a></li>
+                        <li><a href="/#brands">FED</a></li>
+                        <li><a href="/#brands">Liebherr</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="frb-footer-col">
+                <h4>Areas We Serve</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px 40px;">
+                    <ul style="flex: 1; min-width: 100px;">
+                        <li><a href="/#areas">Blacktown</a></li>
+                        <li><a href="/#areas">Seven Hills</a></li>
+                        <li><a href="/#areas">Doonside</a></li>
+                        <li><a href="/#areas">Marayong</a></li>
+                        <li><a href="/#areas">Lalor Park</a></li>
+                        <li><a href="/#areas">Prospect</a></li>
+                    </ul>
+                    <ul style="flex: 1; min-width: 100px;">
+                        <li><a href="/#areas">Quakers Hill</a></li>
+                        <li><a href="/#areas">Rooty Hill</a></li>
+                        <li><a href="/#areas">Mount Druitt</a></li>
+                        <li><a href="/#areas">Glenwood</a></li>
+                        <li><a href="/#areas">Stanhope Gardens</a></li>
+                        <li><a href="/#areas">Kellyville Ridge</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="frb-copyright">
+            <p style="margin-bottom: 5px;">Servicing Blacktown and surrounding Western Sydney suburbs with same-day residential and commercial fridge, freezer, coolroom, and refrigeration repairs.</p>
+            <p>&copy; 2026 Fridge Repairs Blacktown. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- STICKY MOBILE CTA -->
+    <a href="/#contact-form" class="frb-sticky-mobile">
+        <i class="fa-solid fa-calendar-days"></i> Book Now
+    </a>
+
+</div>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        
+        // Header Scroll Effect
+        const siteHeader = document.querySelector('.frb-site-header');
+        if (siteHeader) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 30) {
+                    siteHeader.classList.add('scrolled');
+                } else {
+                    siteHeader.classList.remove('scrolled');
+                }
+            }, { passive: true });
+        }
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('frb-menu-btn');
+        const mobileNav = document.getElementById('frb-mobile-nav');
+        if(menuBtn && mobileNav) {
+            menuBtn.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+                menuBtn.setAttribute('aria-expanded', !isExpanded);
+                const icon = menuBtn.querySelector('i');
+                if(mobileNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars'); icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark'); icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        // Close Mobile Menu on Link Click
+        const navLinks = document.querySelectorAll('.frb-main-nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(mobileNav && mobileNav.classList.contains('active')) {
+                    setTimeout(() => {
+                        mobileNav.classList.remove('active');
+                        if (menuBtn) {
+                            const icon = menuBtn.querySelector('i');
+                            if (icon) {
+                                icon.classList.remove('fa-xmark'); 
+                                icon.classList.add('fa-bars');
+                            }
+                        }
+                    }, 150);
+                }
+            });
+        });
+
+        // Scroll Reveal Animations
+        function triggerRevealAnimation() {
+            const revealElements = document.querySelectorAll('.frb-reveal:not(.active)');
+            if('IntersectionObserver' in window) {
+                if(!window.frbObserver) {
+                    window.frbObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('active');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+                }
+                revealElements.forEach(el => window.frbObserver.observe(el));
+            } else {
+                revealElements.forEach(el => el.classList.add('active'));
+            }
+        }
+        triggerRevealAnimation();
+
+        // Exact Anchor Scrolling (Same-page smooth jump with exact header offset)
+        document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const isSamePage = (this.pathname === window.location.pathname) || 
+                                   (this.pathname === '/' && window.location.pathname === '/index.html');
+                
+                if (isSamePage) {
+                    const targetId = this.hash;
+                    if (targetId && targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            e.preventDefault();
+                            if(mobileNav && mobileNav.classList.contains('active')) {
+                                mobileNav.classList.remove('active');
+                            }
+                            const headerOffset = 90;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                            history.pushState(null, null, targetId);
+                        }
+                    }
+                }
+            });
+        });
+
+        // Extract WP Featured Image safely
+        function getFeaturedImage(post) {
+            let defaultImg = 'https://placehold.co/672x372/EBF1F8/0F3D81?text=Fridge+Repairs+Blacktown';
+            if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
+                const media = post._embedded['wp:featuredmedia'][0];
+                if (media.media_details && media.media_details.sizes) {
+                    const sizes = media.media_details.sizes;
+                    if (sizes.large && sizes.large.source_url) return sizes.large.source_url;
+                    if (sizes.medium_large && sizes.medium_large.source_url) return sizes.medium_large.source_url;
+                }
+                if (media.source_url) return media.source_url;
+            }
+            return defaultImg;
+        }
+
+        // Fetch Recent Blogs for the Sidebar
+        function loadSidebar(currentPostSlug) {
+            fetch(`https://fridgerepairblacktown.com.au/cms/wp-json/wp/v2/posts?_embed&per_page=5&_t=${new Date().getTime()}`)
+                .then(res => res.json())
+                .then(posts => {
+                    const sidebarContainer = document.getElementById('sidebar-recent-posts');
+                    let html = '';
+                    let count = 0;
+                    posts.forEach(post => {
+                        if(post.slug !== currentPostSlug && count < 4) {
+                            const title = post.title.rendered;
+                            const link = `/blog/${post.slug}`;
+                            const imgUrl = getFeaturedImage(post);
+                            
+                            html += `
+                                <div class="frb-recent-post-item">
+                                    <a href="${link}"><img src="${imgUrl}" alt="${title}" class="frb-recent-img" loading="lazy"></a>
+                                    <h4 class="frb-recent-title"><a href="${link}">${title}</a></h4>
+                                </div>
+                            `;
+                            count++;
+                        }
+                    });
+                    
+                    sidebarContainer.innerHTML = html || '<p>No other recent posts found.</p>';
+                    document.getElementById('frb-sidebar').style.display = 'block';
+                })
+                .catch(err => console.error("Error loading sidebar:", err));
+        }
+
+        // Extract Slug from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let postSlug = urlParams.get('post');
+
+        if (!postSlug) {
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+            if (pathParts.length > 0) {
+                const lastPart = pathParts[pathParts.length - 1];
+                if (lastPart !== 'blog' && !lastPart.includes('.html')) {
+                    postSlug = lastPart;
+                }
+            }
+        }
+
+        const loader = document.getElementById('frb-single-loader');
+        const wrapper = document.getElementById('frb-post-wrapper');
+
+        if (!postSlug) {
+            window.location.href = '/blog/';
+        } else {
+            const wpApiUrl = `https://fridgerepairblacktown.com.au/cms/wp-json/wp/v2/posts?slug=${postSlug}&_embed&_t=${new Date().getTime()}`;
+
+            fetch(wpApiUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error('Network error');
+                    return res.json();
+                })
+                .then(posts => {
+                    if (!posts || posts.length === 0) throw new Error('Post not found');
+                    
+                    const post = posts[0]; 
+
+                    document.getElementById('post-title').innerHTML = post.title.rendered;
+                    document.title = `${post.title.rendered} | Fridge Repairs Blacktown`;
+                    document.getElementById('post-content').innerHTML = post.content.rendered;
+                    
+                    const date = new Date(post.date).toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' });
+                    document.getElementById('post-date').innerText = date;
+
+                    const imgWrapper = document.getElementById('post-image-wrapper');
+                    const imgEl = document.getElementById('post-image');
+                    const imageUrl = getFeaturedImage(post);
+                    
+                    if (!imageUrl.includes('placeholder.com')) {
+                        imgEl.src = imageUrl;
+                        imgEl.alt = post.title.rendered;
+                        imgWrapper.style.display = 'block';
+                    }
+
+                    loader.style.display = 'none';
+                    wrapper.style.display = 'block';
+                    setTimeout(() => { wrapper.classList.add('active'); }, 50);
+
+                    loadSidebar(post.slug);
+                })
+                .catch(err => {
+                    console.error(err);
+                    loader.innerHTML = `
+                        <span style="color:var(--secondary)">Error loading the article. It may have been removed or the URL is incorrect.</span><br><br>
+                        <a href="/blog/" class="frb-btn" style="color:#fff; margin-top:15px; display:inline-block;">RETURN TO BLOG</a>
+                    `;
+                });
+        }
+        
+        triggerRevealAnimation();
+    });
+
+ // 10. Fix for Cross-Page Anchor Links on Load (100% Exact Landing Fix with Multi-Retry)
+    window.addEventListener('load', function() {
+        if (window.location.hash) {
+            const hash = window.location.hash;
+            
+            const exactScrollToHash = (retries = 0) => {
+                const targetElement = document.querySelector(hash);
+                if (targetElement) {
+                    // Element ki exact top position nikal kar scroll karein (Header offset 90px)
+                    const headerOffset = 90; 
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: retries === 0 ? "auto" : "smooth" // Pehli dafa instant taake flicker na ho, phir smooth settle ho
+                    });
+
+                    // Agar content load hone ki wajah se layout shift ho raha hai, toh 3 baar mazeed verify karega
+                    if (retries < 3) {
+                        setTimeout(() => exactScrollToHash(retries + 1), 200 * (retries + 1));
+                    }
+                }
+            };
+
+            // Pehli call 150ms ke delay ke sath taake DOM render hona shuru ho jaye
+            setTimeout(() => exactScrollToHash(0), 150);
+        }
+    });
+</script>
+</body>
+</html>

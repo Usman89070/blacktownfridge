@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Allow the main blog.html page to work without .html extension
+RewriteRule ^blog/?$ blog.html [L]
+
+# Redirect clean URLs (e.g. /blog/post-slug) to the single-post.html file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^blog/([^/]+)/?$ single-post.html?post=$1 [L,QSA]
