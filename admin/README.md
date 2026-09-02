@@ -12,7 +12,15 @@ A self-contained PHP + MySQL admin panel for managing the **gallery**, **blog po
    - Username: `admin`
    - Password: `ChangeMe123!`
 
-2. **Fill in your database credentials** in `admin/config.php`:
+2. **(Optional) Import the site's existing gallery photos and reviews** so you don't have to re-enter them by hand:
+   ```
+   mysql -u your_user -p your_database < admin/database/seed_existing_content.sql
+   ```
+   This adds the 6 "Our Recent Work" photos and the 5 customer reviews that were already hardcoded into `index.html`. The matching image files are already sitting in `admin/uploads/gallery/`, so once this import runs they'll show up immediately in `admin/gallery.php`.
+
+   Note: the original review cards on the site never captured a customer name — only a 5-star rating and the quote — so all 5 are seeded as **"Verified Customer"**. Edit each one in `admin/testimonial_form.php` to add the real name if you have it on file.
+
+3. **Fill in your database credentials** in `admin/config.php`:
    ```php
    define('DB_HOST', 'localhost');
    define('DB_NAME', 'your_database');
@@ -20,11 +28,11 @@ A self-contained PHP + MySQL admin panel for managing the **gallery**, **blog po
    define('DB_PASS', 'your_password');
    ```
 
-3. **Upload the `admin/` folder** to your server (it can sit alongside `index.html`, e.g. `yoursite.com/admin/`).
+4. **Upload the `admin/` folder** to your server (it can sit alongside `index.html`, e.g. `yoursite.com/admin/`).
 
-4. Make sure `admin/uploads/gallery/` and `admin/uploads/blog/` are **writable** by PHP (typically `chmod 755` is enough on shared hosting).
+5. Make sure `admin/uploads/gallery/` and `admin/uploads/blog/` are **writable** by PHP (typically `chmod 755` is enough on shared hosting).
 
-5. Visit `yoursite.com/admin/login.php`, log in with the seeded credentials above, and **change the password immediately** from the "Change Password" page.
+6. Visit `yoursite.com/admin/login.php`, log in with the seeded credentials above, and **change the password immediately** from the "Change Password" page.
 
 ## What it does
 
