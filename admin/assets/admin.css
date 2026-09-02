@@ -120,6 +120,9 @@ table.admin-table img.admin-thumb { width: 60px; height: 45px; object-fit: cover
     font-family: inherit;
 }
 .admin-form textarea { resize: vertical; }
+.admin-form .ql-toolbar.ql-snow { border-color: var(--border); border-radius: 6px 6px 0 0; font-family: inherit; }
+.admin-form .ql-container.ql-snow { border-color: var(--border); border-radius: 0 0 6px 6px; font-family: inherit; font-size: 0.95em; }
+.admin-form .ql-editor { min-height: 260px; }
 .admin-form .admin-hint { color: var(--text-light); font-size: 0.82em; margin-top: 4px; }
 .admin-form .admin-actions { margin-top: 24px; display: flex; gap: 10px; }
 .admin-form img.admin-preview { max-width: 200px; border-radius: 6px; margin-top: 10px; display: block; }

@@ -62,9 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = $id ? 'Edit Post' : 'Add Post';
+$extraHead = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.snow.min.css">';
 require __DIR__ . '/includes/header.php';
 ?>
-<form method="post" enctype="multipart/form-data" class="admin-form" style="max-width: 760px;">
+<form id="postForm" method="post" enctype="multipart/form-data" class="admin-form" style="max-width: 760px;">
     <?= csrf_field() ?>
     <?php if ($id): ?><input type="hidden" name="id" value="<?= (int) $id ?>"><?php endif; ?>
 
@@ -81,9 +82,10 @@ require __DIR__ . '/includes/header.php';
     <label for="excerpt">Excerpt</label>
     <textarea id="excerpt" name="excerpt" rows="3"><?= e($post['excerpt']) ?></textarea>
 
-    <label for="content">Content</label>
-    <textarea id="content" name="content" rows="14"><?= e($post['content']) ?></textarea>
-    <div class="admin-hint">Basic HTML tags (e.g. &lt;p&gt;, &lt;strong&gt;, &lt;a&gt;) are allowed here.</div>
+    <label for="content-editor">Content</label>
+    <div id="content-editor"><?= $post['content'] ?></div>
+    <textarea id="content" name="content" style="display:none;"></textarea>
+    <div class="admin-hint">Use the toolbar for bold, headings, lists and links. Pasting from Word, Google Docs, or a webpage keeps that formatting.</div>
 
     <label for="featured_image">Featured Image <?= $id ? '(leave empty to keep the current image)' : '' ?></label>
     <input type="file" id="featured_image" name="featured_image" accept="image/jpeg,image/png,image/webp,image/gif">
@@ -102,4 +104,24 @@ require __DIR__ . '/includes/header.php';
         <a href="blogs.php" class="admin-btn admin-btn-secondary">Cancel</a>
     </div>
 </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
+<script>
+    const quill = new Quill('#content-editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ header: [2, 3, 4, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['blockquote', 'link'],
+                ['clean']
+            ]
+        }
+    });
+
+    document.getElementById('postForm').addEventListener('submit', function () {
+        document.getElementById('content').value = quill.root.innerHTML;
+    });
+</script>
 <?php require __DIR__ . '/includes/footer.php'; ?>

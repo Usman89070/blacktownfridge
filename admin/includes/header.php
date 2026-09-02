@@ -10,6 +10,7 @@ $flash = get_flash();
 <meta name="robots" content="noindex, nofollow">
 <title><?= e($pageTitle ?? 'Admin') ?> | Site Admin</title>
 <link rel="stylesheet" href="assets/admin.css">
+<?= $extraHead ?? '' ?>
 </head>
 <body>
 <div class="admin-layout">
