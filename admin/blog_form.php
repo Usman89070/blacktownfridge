@@ -83,9 +83,9 @@ require __DIR__ . '/includes/header.php';
     <textarea id="excerpt" name="excerpt" rows="3"><?= e($post['excerpt']) ?></textarea>
 
     <label for="content-editor">Content</label>
-    <div id="content-editor"><?= $post['content'] ?></div>
+    <div id="content-editor"><?= normalize_legacy_content($post['content']) ?></div>
     <textarea id="content" name="content" style="display:none;"></textarea>
-    <div class="admin-hint">Use the toolbar for bold, headings, lists and links. Pasting from Word, Google Docs, or a webpage keeps that formatting.</div>
+    <div class="admin-hint">Use the toolbar for bold, headings, lists and links. Pasting from Word, Google Docs, or a webpage keeps that formatting. Press Enter for a new paragraph, or Shift+Enter for a line break within one.</div>
 
     <label for="featured_image">Featured Image <?= $id ? '(leave empty to keep the current image)' : '' ?></label>
     <input type="file" id="featured_image" name="featured_image" accept="image/jpeg,image/png,image/webp,image/gif">

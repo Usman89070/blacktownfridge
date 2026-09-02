@@ -72,6 +72,31 @@ function unique_slug(PDO $pdo, string $baseSlug, ?int $excludeId = null): string
 }
 
 /**
+ * Blog content saved before the rich-text editor existed is plain text with
+ * no HTML at all, so line breaks the admin typed are just "\n" characters —
+ * browsers collapse those to a single space, making everything run together
+ * on one line. Content already containing block-level HTML (i.e. anything
+ * saved by the rich-text editor) is left untouched.
+ */
+function normalize_legacy_content(?string $content): string
+{
+    $content = $content ?? '';
+    if (trim($content) === '') {
+        return '';
+    }
+    if (preg_match('/<(p|div|h[1-6]|ul|ol|li|blockquote|br)\b/i', $content)) {
+        return $content;
+    }
+
+    $paragraphs = preg_split('/(?:\r\n|\n|\r){2,}/', trim($content));
+    $html = array_map(function ($para) {
+        return '<p>' . nl2br(e(trim($para))) . '</p>';
+    }, $paragraphs);
+
+    return implode('', $html);
+}
+
+/**
  * Validate and move an uploaded image into $destDir.
  * Returns the stored filename on success, or null if no file was uploaded.
  * Dies with an error message if the upload is invalid.

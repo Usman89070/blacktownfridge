@@ -8,6 +8,7 @@
  * GET blog-api.php?slug=my-post -> a single published post by slug
  */
 require __DIR__ . '/admin/config.php';
+require __DIR__ . '/admin/includes/functions.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -23,7 +24,7 @@ function format_post(array $post): array
         'title' => $post['title'],
         'slug' => $post['slug'],
         'excerpt' => $post['excerpt'],
-        'content' => $post['content'],
+        'content' => normalize_legacy_content($post['content']),
         'image' => post_image_url($post['featured_image']),
         'date' => date('c', strtotime($post['created_at'])),
     ];
