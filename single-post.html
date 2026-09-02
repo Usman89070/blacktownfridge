@@ -495,7 +495,7 @@
 
         // Fetch Recent Blogs for the Sidebar
         function loadSidebar(currentPostSlug) {
-            fetch(`blog-api.php?limit=5&_t=${new Date().getTime()}`)
+            fetch(`/blog-api.php?limit=5&_t=${new Date().getTime()}`)
                 .then(res => res.json())
                 .then(posts => {
                     const sidebarContainer = document.getElementById('sidebar-recent-posts');
@@ -543,7 +543,7 @@
         if (!postSlug) {
             window.location.href = '/blog/';
         } else {
-            fetch(`blog-api.php?slug=${encodeURIComponent(postSlug)}&_t=${new Date().getTime()}`)
+            fetch(`/blog-api.php?slug=${encodeURIComponent(postSlug)}&_t=${new Date().getTime()}`)
                 .then(res => {
                     if (!res.ok) throw new Error('Post not found');
                     return res.json();

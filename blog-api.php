@@ -13,7 +13,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 function post_image_url(?string $filename): ?string
 {
-    return $filename ? 'admin/' . UPLOAD_URL_BLOG . '/' . $filename : null;
+    return $filename ? '/admin/' . UPLOAD_URL_BLOG . '/' . $filename : null;
 }
 
 function format_post(array $post): array

@@ -450,7 +450,7 @@
             if (!container) return;
 
             try {
-                const response = await fetch(`blog-api.php?_t=${new Date().getTime()}`);
+                const response = await fetch(`/blog-api.php?_t=${new Date().getTime()}`);
                 if (loader) loader.remove();
 
                 if (!response.ok) {

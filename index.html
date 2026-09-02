@@ -1312,7 +1312,7 @@
         // Blog Preview
         const blogContainer = document.getElementById('frb-blog-container');
         if (blogContainer) {
-            fetch(`blog-api.php?limit=3&_t=${new Date().getTime()}`)
+            fetch(`/blog-api.php?limit=3&_t=${new Date().getTime()}`)
                 .then(response => response.json())
                 .then(posts => {
                     const loader = document.getElementById('frb-loader');
