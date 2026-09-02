@@ -244,7 +244,7 @@
     <section class="frb-container" style="padding-top: 40px; min-height: 50vh;">
         <div class="frb-blog-grid" id="frb-blog-container">
             <div class="frb-blog-loader" id="frb-loader">
-                <i class="fa-solid fa-spinner fa-spin"></i> Fetching latest articles from WordPress...
+                <i class="fa-solid fa-spinner fa-spin"></i> Fetching latest articles...
             </div>
         </div>
         <div class="frb-load-more-wrapper" id="frb-load-more-wrapper">
@@ -435,66 +435,40 @@
             }
         }
 
-        // Extract WP Featured Image safely
-        function getFeaturedImage(post) {
-            let defaultImg = 'https://placehold.co/672x372/EBF1F8/0F3D81?text=Fridge+Repairs+Blacktown';
-            if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
-                const media = post._embedded['wp:featuredmedia'][0];
-                if (media.media_details && media.media_details.sizes) {
-                    const sizes = media.media_details.sizes;
-                    if (sizes.large && sizes.large.source_url) return sizes.large.source_url;
-                    if (sizes.medium_large && sizes.medium_large.source_url) return sizes.medium_large.source_url;
-                }
-                if (media.source_url) return media.source_url;
-            }
-            return defaultImg;
+        // Escape plain-text fields before inserting into HTML templates
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str || '';
+            return div.innerHTML;
         }
 
         // Fetch Blogs for the Grid
         const container = document.getElementById('frb-blog-container');
         const loader = document.getElementById('frb-loader');
-        const loadMoreWrapper = document.getElementById('frb-load-more-wrapper');
-        const loadMoreBtn = document.getElementById('frb-load-more-btn');
-        let currentPage = 1;
-        const postsPerPage = 100;
 
-        async function fetchWordPressBlogs(page) {
+        async function fetchBlogs() {
             if (!container) return;
 
-            if(page > 1) {
-                loadMoreBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
-                loadMoreBtn.disabled = true;
-            }
-
-            const wpApiUrl = `https://fridgerepairblacktown.com.au/cms/wp-json/wp/v2/posts?_embed&per_page=${postsPerPage}&page=${page}`;
-
             try {
-                const response = await fetch(wpApiUrl);
-                if (page === 1 && loader) loader.remove();
+                const response = await fetch(`blog-api.php?_t=${new Date().getTime()}`);
+                if (loader) loader.remove();
 
                 if (!response.ok) {
-                    if (response.status === 400 && page > 1) {
-                        loadMoreWrapper.style.display = 'none';
-                        return;
-                    }
                     throw new Error(`Server responded with status ${response.status}`);
                 }
-                
+
                 const posts = await response.json();
 
-                if (posts.length === 0 && page === 1) {
+                if (!Array.isArray(posts) || posts.length === 0) {
                     container.innerHTML = '<div class="frb-blog-loader">No blog posts published yet. Check back soon!</div>';
                     return;
                 }
 
                 posts.forEach((post, index) => {
-                    const title = post.title.rendered;
-                    const tempDiv = document.createElement("div");
-                    tempDiv.innerHTML = post.excerpt.rendered;
-                    const excerptText = tempDiv.textContent || tempDiv.innerText || "";
-                    
+                    const title = escapeHtml(post.title);
+                    const excerptText = escapeHtml(post.excerpt);
                     const link = `/blog/${post.slug}`;
-                    const imgUrl = getFeaturedImage(post);
+                    const imgUrl = post.image || 'https://placehold.co/672x372/EBF1F8/0F3D81?text=Fridge+Repairs+Blacktown';
                     const delay = (index % 3) * 0.1;
 
                     const cardHTML = `
@@ -516,34 +490,13 @@
 
                 triggerRevealAnimation();
 
-                const totalPages = response.headers.get('X-WP-TotalPages');
-                if (totalPages && page < parseInt(totalPages, 10)) {
-                    loadMoreWrapper.style.display = 'block';
-                    loadMoreBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Load Older Posts';
-                    loadMoreBtn.disabled = false;
-                } else {
-                    loadMoreWrapper.style.display = 'none';
-                }
-
             } catch (error) {
                 console.error('Error fetching blogs:', error);
-                if(page === 1) {
-                    container.innerHTML = '<div class="frb-blog-loader" style="color:var(--secondary)">Unable to load posts right now. Please check back later.</div>';
-                } else {
-                    loadMoreBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Try Again';
-                    loadMoreBtn.disabled = false;
-                }
+                container.innerHTML = '<div class="frb-blog-loader" style="color:var(--secondary)">Unable to load posts right now. Please check back later.</div>';
             }
         }
-        
-        fetchWordPressBlogs(currentPage);
 
-        if(loadMoreBtn) {
-            loadMoreBtn.addEventListener('click', () => {
-                currentPage++;
-                fetchWordPressBlogs(currentPage);
-            });
-        }
+        fetchBlogs();
     });
 
     // Cross-Page Anchor Links Multi-Retry Fix on Load

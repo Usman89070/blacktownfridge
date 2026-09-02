@@ -486,24 +486,16 @@
             });
         });
 
-        // Extract WP Featured Image safely
-        function getFeaturedImage(post) {
-            let defaultImg = 'https://placehold.co/672x372/EBF1F8/0F3D81?text=Fridge+Repairs+Blacktown';
-            if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
-                const media = post._embedded['wp:featuredmedia'][0];
-                if (media.media_details && media.media_details.sizes) {
-                    const sizes = media.media_details.sizes;
-                    if (sizes.large && sizes.large.source_url) return sizes.large.source_url;
-                    if (sizes.medium_large && sizes.medium_large.source_url) return sizes.medium_large.source_url;
-                }
-                if (media.source_url) return media.source_url;
-            }
-            return defaultImg;
+        // Escape plain-text fields before inserting into HTML templates
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str || '';
+            return div.innerHTML;
         }
 
         // Fetch Recent Blogs for the Sidebar
         function loadSidebar(currentPostSlug) {
-            fetch(`https://fridgerepairblacktown.com.au/cms/wp-json/wp/v2/posts?_embed&per_page=5&_t=${new Date().getTime()}`)
+            fetch(`blog-api.php?limit=5&_t=${new Date().getTime()}`)
                 .then(res => res.json())
                 .then(posts => {
                     const sidebarContainer = document.getElementById('sidebar-recent-posts');
@@ -511,10 +503,10 @@
                     let count = 0;
                     posts.forEach(post => {
                         if(post.slug !== currentPostSlug && count < 4) {
-                            const title = post.title.rendered;
+                            const title = escapeHtml(post.title);
                             const link = `/blog/${post.slug}`;
-                            const imgUrl = getFeaturedImage(post);
-                            
+                            const imgUrl = post.image || 'https://placehold.co/672x372/EBF1F8/0F3D81?text=Fridge+Repairs+Blacktown';
+
                             html += `
                                 <div class="frb-recent-post-item">
                                     <a href="${link}"><img src="${imgUrl}" alt="${title}" class="frb-recent-img" loading="lazy"></a>
@@ -524,7 +516,7 @@
                             count++;
                         }
                     });
-                    
+
                     sidebarContainer.innerHTML = html || '<p>No other recent posts found.</p>';
                     document.getElementById('frb-sidebar').style.display = 'block';
                 })
@@ -551,32 +543,25 @@
         if (!postSlug) {
             window.location.href = '/blog/';
         } else {
-            const wpApiUrl = `https://fridgerepairblacktown.com.au/cms/wp-json/wp/v2/posts?slug=${postSlug}&_embed&_t=${new Date().getTime()}`;
-
-            fetch(wpApiUrl)
+            fetch(`blog-api.php?slug=${encodeURIComponent(postSlug)}&_t=${new Date().getTime()}`)
                 .then(res => {
-                    if (!res.ok) throw new Error('Network error');
+                    if (!res.ok) throw new Error('Post not found');
                     return res.json();
                 })
-                .then(posts => {
-                    if (!posts || posts.length === 0) throw new Error('Post not found');
-                    
-                    const post = posts[0]; 
+                .then(post => {
+                    document.getElementById('post-title').innerHTML = escapeHtml(post.title);
+                    document.title = `${post.title} | Fridge Repairs Blacktown`;
+                    document.getElementById('post-content').innerHTML = post.content;
 
-                    document.getElementById('post-title').innerHTML = post.title.rendered;
-                    document.title = `${post.title.rendered} | Fridge Repairs Blacktown`;
-                    document.getElementById('post-content').innerHTML = post.content.rendered;
-                    
                     const date = new Date(post.date).toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' });
                     document.getElementById('post-date').innerText = date;
 
                     const imgWrapper = document.getElementById('post-image-wrapper');
                     const imgEl = document.getElementById('post-image');
-                    const imageUrl = getFeaturedImage(post);
-                    
-                    if (!imageUrl.includes('placeholder.com')) {
-                        imgEl.src = imageUrl;
-                        imgEl.alt = post.title.rendered;
+
+                    if (post.image) {
+                        imgEl.src = post.image;
+                        imgEl.alt = post.title;
                         imgWrapper.style.display = 'block';
                     }
 

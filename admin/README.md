@@ -32,14 +32,19 @@ A self-contained PHP + MySQL admin panel for managing the **gallery**, **blog po
 - **Blog Posts** — title, URL slug (auto-generated from the title if left blank), excerpt, HTML content, featured image, and draft/published status.
 - **Testimonials** — customer name, star rating, review text, and a published toggle.
 
-## Important: this does not automatically update the live site
+## How blog posts reach the site
 
-This admin panel manages its **own** database tables. The static `index.html` gallery grid and the WordPress-powered blog on the main site do **not** currently read from these tables — they're separate systems. To have the site actually display what you manage here, one of the following is needed next:
+Published blog posts are served through `blog-api.php` at the repo root — a small public JSON endpoint that reads from the same `blog_posts` table (published posts only; drafts never leave the admin panel):
 
-- Replace the static gallery `<img>` tags in `index.html` and the WordPress blog fetch in `blog.html`/`index.html` with PHP that queries these new tables, **or**
-- Keep this panel as a separate, standalone content source and wire it up when you're ready.
+- `blog-api.php` — list of published posts, newest first
+- `blog-api.php?limit=3` — limit how many are returned
+- `blog-api.php?slug=your-post-slug` — a single post by slug (404 if it's a draft or doesn't exist)
 
-Ask for this follow-up step explicitly if you'd like the homepage/blog to pull from this new database.
+`blog.html`, `index.html` (homepage preview), and `single-post.html` all fetch from this endpoint, so any post you mark **Published** in `admin/blog_form.php` appears on the live site immediately — no separate publish step. This replaced the old WordPress REST API fetch, so the WordPress CMS at `/cms/` is no longer used by these pages.
+
+## Gallery images
+
+The **gallery you manage in `/admin` is separate** from the "Our Recent Work" grid on the homepage, which is still a hand-written list of `<img>` tags in `index.html`. Images added via `admin/gallery_form.php` are stored and listed inside the admin panel, but won't appear on the homepage automatically. Ask if you'd like the homepage gallery switched over to read from this table too, the same way blog posts now do.
 
 ## Security notes
 
