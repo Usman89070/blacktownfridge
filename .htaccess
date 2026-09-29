@@ -11,3 +11,10 @@ RewriteRule ^blog/?$ blog.html [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^blog/([^/]+)/?$ single-post.html?post=$1 [L,QSA]
+
+# Allow the About Us page to work without .html extension
+RewriteRule ^about-us/?$ about-us.html [L]
+
+# Redirect the old /about.html to the new About Us page
+RewriteCond %{THE_REQUEST} \s/+about\.html[\s?] [NC]
+RewriteRule ^about\.html$ /about-us/ [R=301,L,NC]
