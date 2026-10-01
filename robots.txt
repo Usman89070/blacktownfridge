@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /blog-api.php
+Disallow: /send_mail.php
+
+Sitemap: https://fridgerepairblacktown.com.au/sitemap.xml
