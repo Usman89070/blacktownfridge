@@ -5,7 +5,7 @@ require __DIR__ . '/includes/auth.php';
 require_login();
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : (isset($_POST['id']) ? (int) $_POST['id'] : null);
-$post = ['title' => '', 'slug' => '', 'excerpt' => '', 'content' => '', 'featured_image' => null, 'status' => 'draft'];
+$post = ['title' => '', 'slug' => '', 'excerpt' => '', 'meta_description' => '', 'content' => '', 'featured_image' => null, 'status' => 'draft'];
 
 if ($id) {
     $stmt = $pdo->prepare('SELECT * FROM blog_posts WHERE id = ?');
@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $title = trim($_POST['title'] ?? '');
     $excerpt = trim($_POST['excerpt'] ?? '');
-    $content = $_POST['content'] ?? '';
+    $metaDescription = trim($_POST['meta_description'] ?? '');
+    $content = strip_inline_styles(downgrade_h1_tags($_POST['content'] ?? ''));
     $status = ($_POST['status'] ?? 'draft') === 'published' ? 'published' : 'draft';
     $customSlug = trim($_POST['slug'] ?? '');
 
@@ -45,16 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         unlink($old);
                     }
                 }
-                $pdo->prepare('UPDATE blog_posts SET title = ?, slug = ?, excerpt = ?, content = ?, featured_image = ?, status = ? WHERE id = ?')
-                    ->execute([$title, $slug, $excerpt, $content, $uploadedFilename, $status, $id]);
+                $pdo->prepare('UPDATE blog_posts SET title = ?, slug = ?, excerpt = ?, meta_description = ?, content = ?, featured_image = ?, status = ? WHERE id = ?')
+                    ->execute([$title, $slug, $excerpt, $metaDescription, $content, $uploadedFilename, $status, $id]);
             } else {
-                $pdo->prepare('UPDATE blog_posts SET title = ?, slug = ?, excerpt = ?, content = ?, status = ? WHERE id = ?')
-                    ->execute([$title, $slug, $excerpt, $content, $status, $id]);
+                $pdo->prepare('UPDATE blog_posts SET title = ?, slug = ?, excerpt = ?, meta_description = ?, content = ?, status = ? WHERE id = ?')
+                    ->execute([$title, $slug, $excerpt, $metaDescription, $content, $status, $id]);
             }
             set_flash('success', 'Post updated.');
         } else {
-            $pdo->prepare('INSERT INTO blog_posts (title, slug, excerpt, content, featured_image, status) VALUES (?, ?, ?, ?, ?, ?)')
-                ->execute([$title, $slug, $excerpt, $content, $uploadedFilename, $status]);
+            $pdo->prepare('INSERT INTO blog_posts (title, slug, excerpt, meta_description, content, featured_image, status) VALUES (?, ?, ?, ?, ?, ?, ?)')
+                ->execute([$title, $slug, $excerpt, $metaDescription, $content, $uploadedFilename, $status]);
             set_flash('success', 'Post created.');
         }
         redirect('blogs.php');
@@ -81,6 +82,10 @@ require __DIR__ . '/includes/header.php';
 
     <label for="excerpt">Excerpt</label>
     <textarea id="excerpt" name="excerpt" rows="3"><?= e($post['excerpt']) ?></textarea>
+
+    <label for="meta_description">Meta Description (for Google search results)</label>
+    <textarea id="meta_description" name="meta_description" rows="2" maxlength="160"><?= e($post['meta_description']) ?></textarea>
+    <div class="admin-hint">Shown in Google search results. Keep it under 160 characters. If left empty, the excerpt (or the start of the article) is used instead.</div>
 
     <label for="content-editor">Content</label>
     <div id="content-editor"><?= normalize_legacy_content($post['content']) ?></div>

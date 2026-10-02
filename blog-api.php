@@ -24,7 +24,7 @@ function format_post(array $post): array
         'title' => $post['title'],
         'slug' => $post['slug'],
         'excerpt' => $post['excerpt'],
-        'content' => normalize_legacy_content($post['content']),
+        'content' => prepare_post_content($post['content']),
         'image' => post_image_url($post['featured_image']),
         'date' => date('c', strtotime($post['created_at'])),
     ];

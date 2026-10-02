@@ -97,6 +97,40 @@ function normalize_legacy_content(?string $content): string
 }
 
 /**
+ * Strip inline style="..." attributes left over from pasting content in from
+ * Word, Google Docs, or a webpage. Those carry layout that fights the site's
+ * own CSS and bloats the saved HTML.
+ */
+function strip_inline_styles(string $content): string
+{
+    return preg_replace('/\s+style\s*=\s*(".*?"|\'.*?\')/is', '', $content);
+}
+
+/**
+ * The rich-text editor's toolbar only offers H2-H4, but older posts (or
+ * content pasted in from elsewhere) can still carry H1 tags from section
+ * headings. A page must only have one H1 — the post title — so any H1 inside
+ * the article body is downgraded to an H2.
+ */
+function downgrade_h1_tags(string $content): string
+{
+    $content = preg_replace('/<h1(\s[^>]*)?>/i', '<h2$1>', $content);
+    return preg_replace('/<\/h1>/i', '</h2>', $content);
+}
+
+/**
+ * Full normalization applied to a post's content before it is rendered on
+ * the public site: upgrades legacy plain-text posts to HTML, strips any
+ * inline styles, and downgrades any stray H1s to H2s.
+ */
+function prepare_post_content(?string $content): string
+{
+    $content = normalize_legacy_content($content);
+    $content = strip_inline_styles($content);
+    return downgrade_h1_tags($content);
+}
+
+/**
  * Validate and move an uploaded image into $destDir.
  * Returns the stored filename on success, or null if no file was uploaded.
  * Dies with an error message if the upload is invalid.

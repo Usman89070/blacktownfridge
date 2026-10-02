@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
     title VARCHAR(255) NOT NULL,
     slug VARCHAR(255) NOT NULL UNIQUE,
     excerpt TEXT,
+    meta_description VARCHAR(160),
     content LONGTEXT,
     featured_image VARCHAR(255),
     status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',

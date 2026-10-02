@@ -11,6 +11,9 @@ define('DB_NAME', 'CHANGE_ME_db_name');
 define('DB_USER', 'CHANGE_ME_db_user');
 define('DB_PASS', 'CHANGE_ME_db_password');
 
+// ---- Site ----
+define('SITE_URL', 'https://fridgerepairblacktown.com.au');
+
 // ---- Paths ----
 define('ADMIN_ROOT', __DIR__);
 define('UPLOAD_DIR_GALLERY', ADMIN_ROOT . '/uploads/gallery');
