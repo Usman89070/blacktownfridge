@@ -353,7 +353,7 @@ $postDateDisplay = date('j F Y', strtotime($post['created_at']));
                 <h4>Our Services</h4>
                 <ul>
                     <li><a href="/#services">Home Fridge Repairs</a></li>
-                    <li><a href="/#services">Commercial Fridge Repairs</a></li>
+                    <li><a href="/commercial-fridge-repair-blacktown/">Commercial Fridge Repairs</a></li>
                     <li><a href="/#services">Freezer Repairs</a></li>
                     <li><a href="/#services">Coolroom Repairs</a></li>
                     <li><a href="/#services">Fridge Regassing</a></li>

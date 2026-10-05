@@ -15,6 +15,9 @@ RewriteRule ^blog/([^/]+)/?$ single-post.php?post=$1 [L,QSA]
 # Allow the About Us page to work without .html extension
 RewriteRule ^about-us/?$ about-us.html [L]
 
+# Allow the Commercial Fridge Repair landing page to work without .html extension
+RewriteRule ^commercial-fridge-repair-blacktown/?$ commercial-fridge-repair-blacktown.html [L]
+
 # Redirect the old /about.html to the new About Us page
 RewriteCond %{THE_REQUEST} \s/+about\.html[\s?] [NC]
 RewriteRule ^about\.html$ /about-us/ [R=301,L,NC]
