@@ -18,6 +18,12 @@ RewriteRule ^about-us/?$ about-us.html [L]
 # Allow the Commercial Fridge Repair landing page to work without .html extension
 RewriteRule ^commercial-fridge-repair-blacktown/?$ commercial-fridge-repair-blacktown.html [L]
 
+# Allow the Freezer Repair landing page to work without .html extension
+RewriteRule ^freezer-repair-blacktown/?$ freezer-repair-blacktown.html [L]
+
+# Allow the Emergency Fridge Repair landing page to work without .html extension
+RewriteRule ^emergency-fridge-repair/?$ emergency-fridge-repair.html [L]
+
 # Redirect the old /about.html to the new About Us page
 RewriteCond %{THE_REQUEST} \s/+about\.html[\s?] [NC]
 RewriteRule ^about\.html$ /about-us/ [R=301,L,NC]

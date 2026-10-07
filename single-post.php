@@ -354,14 +354,14 @@ $postDateDisplay = date('j F Y', strtotime($post['created_at']));
                 <ul>
                     <li><a href="/#services">Home Fridge Repairs</a></li>
                     <li><a href="/commercial-fridge-repair-blacktown/">Commercial Fridge Repairs</a></li>
-                    <li><a href="/#services">Freezer Repairs</a></li>
+                    <li><a href="/freezer-repair-blacktown/">Freezer Repairs</a></li>
                     <li><a href="/#services">Coolroom Repairs</a></li>
                     <li><a href="/#services">Fridge Regassing</a></li>
                     <li><a href="/#services">Display Fridge Repairs</a></li>
                     <li><a href="/#services">Salad Bar Fridge Repairs</a></li>
                     <li><a href="/#services">Commercial Exhaust System Repairs</a></li>
-                    <li><a href="/#emergency">Emergency Fridge Repairs</a></li>
-                    <li><a href="/#emergency">Urgent Fridge Repairs</a></li>
+                    <li><a href="/emergency-fridge-repair/">Emergency Fridge Repairs</a></li>
+                    <li><a href="/emergency-fridge-repair/">Urgent Fridge Repairs</a></li>
                 </ul>
             </div>
             <div class="frb-footer-col">
