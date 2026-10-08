@@ -242,6 +242,10 @@
     /* SERVICES DROPDOWN */
     .frb-has-dropdown { position: relative; }
     .frb-dropdown-toggle { display: none; position: absolute; top: 0; right: 0; width: 46px; height: 100%; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: var(--primary); font-size: 0.85em; padding: 0; }
+    @media (min-width: 993px) {
+        .frb-has-dropdown { display: inline-flex; align-items: center; }
+        .frb-dropdown-toggle { display: inline-flex; position: static; width: auto; height: auto; min-width: 20px; min-height: 20px; margin-left: 4px; padding: 2px; }
+    }
     .frb-dropdown-toggle i { transition: transform 0.3s ease; }
     .frb-has-dropdown.frb-dropdown-open .frb-dropdown-toggle i { transform: rotate(180deg); }
     .frb-main-nav .frb-dropdown-menu { display: block; list-style: none; margin: 0; padding: 10px; position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--white); min-width: 250px; border-radius: var(--radius-sm); box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; z-index: 10001; }
