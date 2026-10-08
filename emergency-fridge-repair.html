@@ -344,6 +344,29 @@
         body { padding-bottom: 65px; }
         .frb-table-wrapper table { min-width: 560px; }
     }
+
+    /* SERVICES DROPDOWN */
+    .frb-has-dropdown { position: relative; }
+    .frb-dropdown-toggle { display: none; position: absolute; top: 0; right: 0; width: 46px; height: 100%; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: var(--primary); font-size: 0.85em; padding: 0; }
+    .frb-dropdown-toggle i { transition: transform 0.3s ease; }
+    .frb-has-dropdown.frb-dropdown-open .frb-dropdown-toggle i { transform: rotate(180deg); }
+    .frb-dropdown-menu { list-style: none; margin: 0; padding: 10px; position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--white); min-width: 250px; border-radius: var(--radius-sm); box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; z-index: 10001; }
+    .frb-main-nav .frb-dropdown-menu li { margin: 0; width: auto; text-align: left; border-bottom: none; }
+    .frb-main-nav .frb-dropdown-menu li a { display: block; padding: 10px 14px; border-radius: 6px; color: var(--text-dark); font-weight: 600; font-size: 0.92rem; white-space: nowrap; text-align: left; }
+    .frb-main-nav .frb-dropdown-menu li a::after { display: none; }
+    .frb-main-nav .frb-dropdown-menu li a:hover { background: var(--primary-light); color: var(--primary); }
+    @media (hover: hover) and (pointer: fine) {
+        .frb-has-dropdown:hover .frb-dropdown-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    }
+    .frb-has-dropdown.frb-dropdown-open .frb-dropdown-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    @media (max-width: 992px) {
+        .frb-dropdown-toggle { display: flex; }
+        .frb-main-nav .frb-has-dropdown > a { padding-right: 46px; }
+        .frb-dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; pointer-events: auto; box-shadow: none; background: var(--primary-light); max-height: 0; overflow: hidden; padding: 0; border-radius: 0; transition: max-height 0.3s ease; }
+        .frb-has-dropdown.frb-dropdown-open .frb-dropdown-menu { max-height: 280px; transform: none; }
+        .frb-main-nav .frb-dropdown-menu li a { padding: 14px 20px 14px 40px; border-bottom: 1px solid rgba(15,61,129,0.08); font-size: 0.95rem; text-align: center; white-space: normal; }
+        .frb-main-nav .frb-dropdown-menu li:last-child a { border-bottom: none; }
+    }
 </style>
 </head>
 <body>
@@ -360,7 +383,16 @@
                 <ul>
                     <li><a href="/#hero">Home</a></li>
                     <li><a href="/about-us/">About Us</a></li>
-                    <li><a href="/#services" class="active">Services</a></li>
+                    <li class="frb-has-dropdown">
+                        <a href="/#services" class="active">Services</a>
+                        <button type="button" class="frb-dropdown-toggle" aria-expanded="false" aria-label="Toggle Services menu"><i class="fa-solid fa-chevron-down"></i></button>
+                        <ul class="frb-dropdown-menu">
+                            <li><a href="/commercial-fridge-repair-blacktown/">Commercial Fridge Repair</a></li>
+                            <li><a href="/freezer-repair-blacktown/">Freezer Repair</a></li>
+                            <li><a href="/emergency-fridge-repair/">Emergency Fridge Repair</a></li>
+                            <li><a href="/#services">View All Services</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/#brands">Brands</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/#image-grid">Gallery</a></li>
@@ -780,6 +812,17 @@
                 }
             });
         }
+
+        // Services Dropdown Toggle (mobile tap-to-expand; desktop also works via hover)
+        document.querySelectorAll('.frb-dropdown-toggle').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const parentLi = btn.closest('.frb-has-dropdown');
+                const isOpen = parentLi.classList.toggle('frb-dropdown-open');
+                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+        });
 
         // Close menu automatically with delay for smooth navigation
         const navLinks = document.querySelectorAll('.frb-main-nav ul li a');
