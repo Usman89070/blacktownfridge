@@ -374,7 +374,7 @@ $postDateDisplay = date('j F Y', strtotime($post['created_at']));
         <div class="frb-footer-grid">
             <div class="frb-footer-col frb-footer-brand">
                 <div class="frb-footer-logo-wrapper">
-                    <img src="/images/logo.webp" alt="Fridge Repairs Blacktown Logo" width="55" height="65" loading="lazy" decoding="async" style="max-height: 50px; width: auto; display: block;">
+                    <img src="/images/logo.webp" alt="Fridge Repairs Blacktown Logo" width="200" height="65" loading="lazy" decoding="async" style="max-height: 50px; width: auto; display: block;">
                 </div>
                 <p>Providing reliable residential and commercial fridge repairs across Blacktown and surrounding suburbs.</p>
                 <ul class="frb-footer-contact">
