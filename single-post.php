@@ -48,6 +48,45 @@ $postDateDisplay = date('j F Y', strtotime($post['created_at']));
 <meta name="description" content="<?= e($metaDescription) ?>">
 <link rel="canonical" href="<?= e($postUrl) ?>">
 
+<script type="application/ld+json">
+<?php
+$schema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'BlogPosting',
+            '@id' => $postUrl . '#article',
+            'headline' => $post['title'],
+            'description' => $metaDescription,
+            'url' => $postUrl,
+            'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $postUrl],
+            'datePublished' => date('c', strtotime($post['created_at'])),
+            'dateModified' => date('c', strtotime($post['updated_at'] ?: $post['created_at'])),
+            'author' => ['@type' => 'Organization', 'name' => 'Fridge Repairs Blacktown', 'url' => SITE_URL],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'Fridge Repairs Blacktown',
+                'logo' => ['@type' => 'ImageObject', 'url' => SITE_URL . '/images/logo.webp'],
+            ],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id' => $postUrl . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => SITE_URL . '/'],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog', 'item' => SITE_URL . '/blog/'],
+                ['@type' => 'ListItem', 'position' => 3, 'name' => $post['title'], 'item' => $postUrl],
+            ],
+        ],
+    ],
+];
+if ($imageUrl) {
+    $schema['@graph'][0]['image'] = SITE_URL . $imageUrl;
+}
+echo json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+?>
+</script>
+
 <!-- Favicon (Logo in browser tab) -->
 <link rel="icon" type="image/webp" href="/images/logo.webp">
 <link rel="apple-touch-icon" href="/images/logo.webp">
@@ -167,6 +206,18 @@ $postDateDisplay = date('j F Y', strtotime($post['created_at']));
     .frb-post-text .alignleft { float: left; margin-right: 20px; margin-bottom: 10px; }
     .frb-post-text .alignright { float: right; margin-left: 20px; margin-bottom: 10px; }
     .frb-post-text .aligncenter { display: block; margin: 0 auto 20px auto; text-align: center; }
+
+    .frb-post-text .frb-table-wrapper { overflow-x: auto; margin: 30px 0; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); }
+    .frb-post-text table { width: 100%; border-collapse: collapse; background: var(--white); min-width: 480px; }
+    .frb-post-text table th { background: var(--primary-light); color: var(--primary); text-align: left; padding: 14px 18px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+    .frb-post-text table td { padding: 14px 18px; border-bottom: 1px solid #F1F5F9; font-size: 0.95em; }
+    .frb-post-text table tr:last-child td { border-bottom: none; }
+    .frb-post-text table tr:nth-child(even) td { background-color: var(--bg-light); }
+
+    .frb-post-text .frb-quick-answer { background: var(--primary-light); border-left: 4px solid var(--primary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 20px 25px; margin: 30px 0; }
+    .frb-post-text .frb-quick-answer strong { color: var(--primary); }
+    .frb-post-text .frb-byline { color: var(--text-light); font-size: 0.95em; font-style: italic; margin: -10px 0 25px; }
+    .frb-post-text .frb-placeholder-note { display: inline-flex; align-items: center; gap: 8px; margin: 10px 0 20px; padding: 8px 16px; background: #FEF9C3; color: #854D0E; border-radius: 50px; font-size: 0.85em; font-weight: 600; }
 
     /* SIDEBAR */
     .frb-sidebar { background: var(--white); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-3d); border: 1px solid rgba(255,255,255,0.8); border-top: 2px solid #ffffff; position: sticky; top: 100px; }
