@@ -3,7 +3,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Set the recipient email address
-    $to = "info@fridgerepairblacktown.com.au";
+    $to = "info@fastfridgerepairs.com.au";
     
     // Set the email subject
     $subject = "New Quote Request from Website";
