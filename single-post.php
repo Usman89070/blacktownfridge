@@ -83,6 +83,20 @@ $schema = [
 if ($imageUrl) {
     $schema['@graph'][0]['image'] = SITE_URL . $imageUrl;
 }
+$faqs = decode_faq_json($post['faq_json'] ?? null);
+if ($faqs) {
+    $schema['@graph'][] = [
+        '@type' => 'FAQPage',
+        '@id' => $postUrl . '#faq',
+        'mainEntity' => array_map(function ($faq) {
+            return [
+                '@type' => 'Question',
+                'name' => $faq['question'],
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['answer']],
+            ];
+        }, $faqs),
+    ];
+}
 echo json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 ?>
 </script>
@@ -185,6 +199,15 @@ echo json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     .frb-post-title { font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: var(--primary); margin-bottom: 15px; border: none; }
     .frb-post-meta { color: var(--text-light); font-size: 0.95em; font-weight: 500; display: flex; justify-content: center; align-items: center; gap: 15px; }
     .frb-post-meta i { color: var(--secondary); }
+    .frb-author-byline { color: var(--text-light); font-size: 0.95em; font-style: italic; margin-top: 8px; }
+
+    /* FAQ */
+    .frb-post-faq { margin-top: 50px; }
+    .frb-post-faq h2 { text-align: center; margin-bottom: 30px; }
+    .frb-faq-item { padding: 0; overflow: hidden; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,1); margin-bottom: 16px; background: var(--bg-light); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .frb-faq-question { padding: 22px 25px 10px 25px; font-weight: 600; color: var(--primary); background: var(--primary-light); border-radius: var(--radius-sm) var(--radius-sm) 0 0; display: block; width: 100%; text-align: left; font-family: var(--font-main); font-size: 1.05em; margin: 0; border: none; }
+    .frb-faq-answer { color: var(--text-light); padding: 0 25px 22px 25px; background: var(--white); border-radius: 0 0 var(--radius-sm) var(--radius-sm); }
+    .frb-faq-answer p { margin-top: 15px; margin-bottom: 0; line-height: 1.7; }
 
     .frb-post-image-wrapper { width: 100%; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 40px; box-shadow: var(--shadow-sm); aspect-ratio: 672 / 372; background-color: var(--primary-light); }
     .frb-post-image-wrapper img { width: 100%; height: 100%; object-fit: contain; display: block; }
@@ -402,6 +425,9 @@ echo json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                     <div class="frb-post-meta">
                         <span><i class="fa-solid fa-calendar-days"></i> <time datetime="<?= e($postDateIso) ?>" id="post-date"><?= e($postDateDisplay) ?></time></span>
                     </div>
+                    <?php if (!empty($post['author_byline'])): ?>
+                        <p class="frb-author-byline"><?= e($post['author_byline']) ?></p>
+                    <?php endif; ?>
                 </div>
                 <?php if ($imageUrl): ?>
                 <div class="frb-post-image-wrapper" id="post-image-wrapper">
@@ -409,6 +435,18 @@ echo json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                 </div>
                 <?php endif; ?>
                 <article class="frb-post-text" id="post-content"><?= $contentHtml ?></article>
+
+                <?php if ($faqs): ?>
+                <div class="frb-post-faq">
+                    <h2>Frequently Asked Questions</h2>
+                    <?php foreach ($faqs as $faq): ?>
+                        <div class="frb-faq-item">
+                            <h3 class="frb-faq-question"><?= e($faq['question']) ?></h3>
+                            <div class="frb-faq-answer"><p><?= e($faq['answer']) ?></p></div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
             </div>
 
             <!-- Sidebar -->

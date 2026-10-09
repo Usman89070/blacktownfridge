@@ -131,6 +131,32 @@ function prepare_post_content(?string $content): string
 }
 
 /**
+ * Decode a blog post's faq_json column into a clean list of
+ * ['question' => ..., 'answer' => ...] pairs, dropping any entry missing
+ * either side. Used both to re-populate the admin FAQ builder when editing a
+ * post and to render the public FAQ section and FAQPage schema.
+ */
+function decode_faq_json(?string $json): array
+{
+    if (!$json) {
+        return [];
+    }
+    $decoded = json_decode($json, true);
+    if (!is_array($decoded)) {
+        return [];
+    }
+    $faqs = [];
+    foreach ($decoded as $item) {
+        $question = trim((string) ($item['question'] ?? ''));
+        $answer = trim((string) ($item['answer'] ?? ''));
+        if ($question !== '' && $answer !== '') {
+            $faqs[] = ['question' => $question, 'answer' => $answer];
+        }
+    }
+    return $faqs;
+}
+
+/**
  * Validate and move an uploaded image into $destDir.
  * Returns the stored filename on success, or null if no file was uploaded.
  * Dies with an error message if the upload is invalid.
